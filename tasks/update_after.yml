@@ -8,5 +8,6 @@
     virtualenv={{ ansistrano_release_path.stdout }}/.venv
     virtualenv_command={{ pycsw_python_bin }}/virtualenv
     requirements={{ ansistrano_release_path.stdout }}/requirements-datagov.txt
+    chdir={{ ansistrano_release_path.stdout }}
     umask=0022
     state=present
