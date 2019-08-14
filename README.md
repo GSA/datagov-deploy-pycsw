@@ -27,7 +27,7 @@ Use the role in your playbook:
   pre_tasks:
     - name: set pycsw_deploy_version
       set_fact:
-	pycsw_deploy_version: "{{ '%Y%m%d%H%M%SZ' | strftime(ansible_date_time.epoch) }}"
+        pycsw_deploy_version: "{{ '%Y%m%d%H%M%SZ' | strftime(ansible_date_time.epoch) }}"
   roles:
     - role: gsa.datagov-deploy-pycsw
       vars:
@@ -46,20 +46,8 @@ more.
 
 This is just a timestamp so each deploy can be installed to a unique folder. To
 avoid different versions set in the case of using `serial`, it's best to set
-this explicitly in your playbook. e.g.
-
-```yaml
-- name: deploy
-  hosts: all
-  pre_tasks:
-    - name: set pycsw_deploy_version
-      set_fact:
-	pycsw_deploy_version: "{{ '%Y%m%d%H%M%SZ' | strftime(ansible_date_time.epoch) }}"
-  roles:
-    - role: gsa.datagov-deploy-pycsw
-```
-
-`pycsw_deploy_version` is passed directly to `ansistrano_release_version`.
+this explicitly in your playbook. `pycsw_deploy_version` is passed directly to
+`ansistrano_release_version`.
 
 
 #### `pycsw_db_user` string (default: `pycsw`)
