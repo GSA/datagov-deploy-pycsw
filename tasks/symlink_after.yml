@@ -1,0 +1,30 @@
+---
+- name: create supervisor config
+  copy: src=supervisor_{{ pycsw_role }}.conf.j2 dest=/etc/supervisor/conf.d/pycsw.conf owner=root group=root mode=0644
+  notify: reload supervisor
+
+- name: create pycsw-collection.cfg
+  template: src=etc_pycsw_pycsw.cfg.j2 dest=/etc/pycsw/pycsw-collection.cfg owner=root group=pycsw mode=0640
+  vars:
+    pycsw_abstract: "{{ pycsw_abstract_collection }}"
+    pycsw_app_url: "{{ pycsw_base_url }}/csw"
+  notify: reload supervisor
+
+- name: create pycsw-all.cfg
+  template: src=etc_pycsw_pycsw.cfg.j2 dest=/etc/pycsw/pycsw-all.cfg owner=root group=pycsw mode=0640
+  vars:
+    pycsw_abstract: "{{ pycsw_abstract_collection }}"
+    pycsw_app_url: "{{ pycsw_base_url }}/csw-all"
+    pycsw_filter: "{{ pycsw_filter_collection }}"
+  notify: reload supervisor
+
+# We explicitly update web services here because the code just changed. For the
+# worker tasks which are usually run by cron, they don't need an explicit
+# restart (in fact, starting them would be wrong). If any of the configs
+# changed, they will be picked up on the next run.
+- name: restart pycsw web services
+  supervisorctl: name={{ item }} state=restarted
+  loop:
+    - pycsw-collection
+    - pycsw-all
+  when: pycsw_role == "web"

@@ -1,0 +1,31 @@
+---
+pycsw_abstract_all: >-
+  This catalog contains all metadata records for data, services, and
+  applications harvested from registered metadata collections with data.gov,
+  including large numbers of products within several large homogeneous
+  collections. Data may be referenced from federal, state, local, tribal,
+  academic, commercial, or non-profit organizations.
+
+pycsw_abstract_collection: >-
+  This catalog contains metadata for all first-order data, services, and
+  applications harvested from registered metadata collections with data.gov.
+  Data may be referenced from federal, state, local, tribal, academic,
+  commercial, or non-profit organizations.
+
+pycsw_app_home: /home/pycsw
+pycsw_app_repo: https://github.com/GSA/pycsw
+pycsw_app_version: datagov/pin-dependencies
+pycsw_app_os_packages:
+  - libgeos-dev
+  - libpq-dev
+
+pycsw_base_url: https://catalog.data.gov
+pycsw_catalog_ckan_url: https://catalog.data.gov
+pycsw_db_user: pycsw
+pycsw_db_name: pycsw
+pycsw_filter_collection: "ckan_collection = '1'"
+pycsw_keep_releases: 5
+pycsw_python_bin: "{{ pycsw_app_home }}/.pyenv/versions/{{ pycsw_python_version }}/bin"
+pycsw_python_version: 2.7.16
+pycsw_role: web
+pycsw_support_email: datagov@gsa.gov

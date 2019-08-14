@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: datagov-deploy-pycsw
+      pycsw_db_host: localhost
+      pycsw_db_password: fake-db-password
+      pycsw_deploy_version: 20190814012512Z

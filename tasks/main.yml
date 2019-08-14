@@ -1,0 +1,34 @@
+---
+- name: check pycsw_db_host is set
+  fail:
+    msg: pycsw_db_host is required
+  when: pycsw_db_host is not defined
+
+- name: check pycsw_db_password is set
+  fail:
+    msg: pycsw_db_password is required
+  when: pycsw_db_password is not defined
+
+- name: check pycsw_deploy_version is set
+  fail:
+    msg: pycsw_deploy_version is required
+  when: pycsw_deploy_version is not defined
+
+- name: set tasks hook path for ansistrano
+  set_fact:
+    tasks_hooks_path: "{{ role_path }}/tasks"
+
+- name: ansistrano deploy
+  import_role: name=ansistrano.deploy
+  vars:
+    ansistrano_allow_anonymous_stats: false
+    ansistrano_deploy_to: "{{ pycsw_app_home }}"
+    ansistrano_keep_releases: "{{ pycsw_keep_releases }}"
+    ansistrano_shared_files: []
+    ansistrano_deploy_via: git
+    ansistrano_git_repo: "{{ pycsw_app_repo }}"
+    ansistrano_git_branch: "{{ pycsw_app_version }}"
+    ansistrano_release_version: "{{ pycsw_deploy_version }}"
+    ansistrano_before_setup_tasks_file: "{{ tasks_hooks_path }}/setup_before.yml"
+    ansistrano_after_update_code_tasks_file: "{{ tasks_hooks_path }}/update_after.yml"
+    ansistrano_after_symlink_tasks_file: "{{ tasks_hooks_path }}/symlink_after.yml"

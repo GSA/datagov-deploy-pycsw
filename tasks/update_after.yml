@@ -1,0 +1,12 @@
+---
+- debug:
+    msg: virtualenv_command={{ virtualenv_command }}
+  when: debug is defined
+
+- name: install app dependencies into virtualenv
+  pip: >-
+    virtualenv={{ ansistrano_release_path.stdout }}/.venv
+    virtualenv_command={{ pycsw_python_bin }}/virtualenv
+    requirements={{ ansistrano_release_path.stdout }}/requirements-datagov.txt
+    umask=0022
+    state=present
