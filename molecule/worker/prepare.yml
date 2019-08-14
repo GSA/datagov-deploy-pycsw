@@ -1,0 +1,15 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    # CI times out on task `Install development packages necessary for building
+    # Python`, install some of them earlier so it doesn't take as long
+    - name: install python build dependencies
+      apt: name={{ packages }} state=present update_cache=yes cache_valid_time={{ 24 * 60 * 60 }}
+      vars:
+        packages:
+          - build-essential
+          - libssl-dev
+          - llvm
+          - make
+          - python-openssl
