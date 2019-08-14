@@ -4,3 +4,24 @@ stdout_logfile=/var/log/pycsw/pycsw-load.log
 redirect_stderr=true
 autostart=false
 autorestart=false
+
+[program:pycsw-keywords-all]
+command=/home/pycsw/current/.venv/bin/pycsw-ckan.py -c set_keywords -f /etc/pycsw/pycsw-all.cfg
+stdout_logfile=/var/log/pycsw/keywords-all.log
+redirect_stderr=true
+autostart=false
+autorestart=false
+
+[program:pycsw-keywords-collection]
+command=/home/pycsw/current/.venv/bin/pycsw-ckan.py -c set_keywords -f /etc/pycsw/pycsw-collection.cfg
+stdout_logfile=/var/log/pycsw/keywords-collection.log
+redirect_stderr=true
+autostart=false
+autorestart=false
+
+[program:pycsw-reindex-fts]
+command=/home/pycsw/.venv/bin/pycsw-db-admin.py reindex_fts /etc/pycsw/pycsw-all.cfg
+stdout_logfile=/var/log/pycsw/reindex-fts.log
+redirect_stderr=true
+autostart=false
+autorestart=false

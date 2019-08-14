@@ -111,3 +111,12 @@ def test_pycsw_worker_services(host):
 
     assert not pycsw_load.is_running
     assert pycsw_load.status == 'STOPPED'
+
+
+def test_cron(host):
+    cron = host.file('/etc/cron.d/pycsw')
+
+    assert cron.exists
+    assert cron.user == 'root'
+    assert cron.group == 'root'
+    assert cron.mode == 0o644

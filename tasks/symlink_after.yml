@@ -3,6 +3,10 @@
   copy: src=supervisor_{{ pycsw_role }}.conf.j2 dest=/etc/supervisor/conf.d/pycsw.conf owner=root group=root mode=0644
   notify: reload supervisor
 
+- name: create crontab
+  copy: src=worker.cron dest=/etc/cron.d/pycsw mode=0644
+  when: pycsw_role == "worker"
+
 - name: create pycsw-collection.cfg
   template: src=pycsw.cfg.j2 dest=/etc/pycsw/pycsw-collection.cfg owner=root group=pycsw mode=0640
   vars:
