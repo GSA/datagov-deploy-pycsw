@@ -39,31 +39,20 @@ def test_app_current_link(host):
 
     assert current.exists
     assert current.is_symlink
-    assert current.user == app_user
-    assert current.group == app_user
+    assert current.user == 'root'
+    assert current.group == 'root'
     assert current.linked_to == expected_deployment
 
 
-def test_app_src_dir(host):
+def test_app_release_dir(host):
     src = host.file(
-        '/home/%s/releases/%s/src' % (app_user, deployment_version))
+        '/home/%s/releases/%s' % (app_user, deployment_version))
 
     assert src.exists
     assert src.is_directory
-    assert src.user == app_user
-    assert src.group == app_user
+    assert src.user == 'root'
+    assert src.group == 'root'
     assert src.mode == 0o755
-
-
-def test_app_src_code(host):
-    app_source = host.file(
-        '/home/%s/releases/%s/.git' % (app_user, deployment_version))
-
-    assert app_source.exists
-    assert app_source.is_directory
-    assert app_source.user == app_user
-    assert app_source.group == app_user
-    assert app_source.mode == 0o755
 
 
 def test_app_virtualenv_dir(host):
@@ -72,8 +61,8 @@ def test_app_virtualenv_dir(host):
 
     assert virtualenv.exists
     assert virtualenv.is_directory
-    assert virtualenv.user == app_user
-    assert virtualenv.group == app_user
+    assert virtualenv.user == 'root'
+    assert virtualenv.group == 'root'
     assert virtualenv.mode == 0o755
 
 
@@ -82,8 +71,8 @@ def test_app_virtualenv_python(host):
                        % (app_user, deployment_version))
 
     assert python.exists
-    assert python.user == app_user
-    assert python.group == app_user
+    assert python.user == 'root'
+    assert python.group == 'root'
     assert python.mode == 0o755
 
 
