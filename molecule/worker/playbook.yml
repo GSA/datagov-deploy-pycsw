@@ -6,3 +6,4 @@
       pycsw_db_host: localhost
       pycsw_db_password: fake-db-password
       pycsw_deploy_version: 20190308132800Z
+      pycsw_role: worker

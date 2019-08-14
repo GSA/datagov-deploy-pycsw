@@ -106,6 +106,8 @@ def test_supervisor_conf(host):
     assert conf.exists
 
 
-def test_pycsw_web_services(host):
-    assert host.supervisor('pycsw-collection').is_running
-    assert host.supervisor('pycsw-all').is_running
+def test_pycsw_worker_services(host):
+    pycsw_load = host.supervisor('pycsw-load')
+
+    assert not pycsw_load.is_running
+    assert pycsw_load.status == 'STOPPED'
