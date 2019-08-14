@@ -3,6 +3,7 @@
   apt: name={{ [role_packages, pycsw_app_os_packages] | flatten }} state=present
   vars:
     role_packages:
+      - cron
       - git
       - python-setuptools  # Needed for ansible pip
       - rsync  # Needed for ansistrano role
