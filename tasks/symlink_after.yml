@@ -4,14 +4,14 @@
   notify: reload supervisor
 
 - name: create pycsw-collection.cfg
-  template: src=etc_pycsw_pycsw.cfg.j2 dest=/etc/pycsw/pycsw-collection.cfg owner=root group=pycsw mode=0640
+  template: src=pycsw.cfg.j2 dest=/etc/pycsw/pycsw-collection.cfg owner=root group=pycsw mode=0640
   vars:
     pycsw_abstract: "{{ pycsw_abstract_collection }}"
     pycsw_app_url: "{{ pycsw_base_url }}/csw"
   notify: reload supervisor
 
 - name: create pycsw-all.cfg
-  template: src=etc_pycsw_pycsw.cfg.j2 dest=/etc/pycsw/pycsw-all.cfg owner=root group=pycsw mode=0640
+  template: src=pycsw.cfg.j2 dest=/etc/pycsw/pycsw-all.cfg owner=root group=pycsw mode=0640
   vars:
     pycsw_abstract: "{{ pycsw_abstract_collection }}"
     pycsw_app_url: "{{ pycsw_base_url }}/csw-all"
