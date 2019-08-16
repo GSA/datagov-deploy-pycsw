@@ -39,8 +39,8 @@ def test_app_current_link(host):
 
     assert current.exists
     assert current.is_symlink
-    assert current.user == 'root'
-    assert current.group == 'root'
+    assert current.user == 'pycsw'
+    assert current.group == 'pycsw'
     assert current.linked_to == expected_deployment
 
 
@@ -50,8 +50,8 @@ def test_app_release_dir(host):
 
     assert src.exists
     assert src.is_directory
-    assert src.user == 'root'
-    assert src.group == 'root'
+    assert src.user == 'pycsw'
+    assert src.group == 'pycsw'
     assert src.mode == 0o755
 
 
@@ -61,8 +61,8 @@ def test_app_virtualenv_dir(host):
 
     assert virtualenv.exists
     assert virtualenv.is_directory
-    assert virtualenv.user == 'root'
-    assert virtualenv.group == 'root'
+    assert virtualenv.user == 'pycsw'
+    assert virtualenv.group == 'pycsw'
     assert virtualenv.mode == 0o755
 
 
@@ -71,8 +71,8 @@ def test_app_virtualenv_python(host):
                        % (app_user, deployment_version))
 
     assert python.exists
-    assert python.user == 'root'
-    assert python.group == 'root'
+    assert python.user == 'pycsw'
+    assert python.group == 'pycsw'
     assert python.mode == 0o755
 
 
