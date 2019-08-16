@@ -19,7 +19,7 @@ jobs:
           paths:
             - .venv
       - setup_remote_docker
-      - run: pipenv run molecule test --all
+      - run: pipenv run test
 
   snyk:
     docker:
