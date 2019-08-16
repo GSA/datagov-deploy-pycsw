@@ -18,8 +18,45 @@
   set_fact:
     tasks_hooks_path: "{{ role_path }}/tasks"
 
+- name: install os packages
+  apt: name={{ [role_packages, pycsw_app_os_packages] | flatten }} state=present
+  vars:
+    role_packages:
+      - cron
+      - git
+      - python-setuptools  # Needed for ansible pip
+      - rsync  # Needed for ansistrano role
+      - supervisor
+
+- name: ensure supervisor is started and enabled
+  service: name=supervisor state=started enabled=yes
+
+- name: create pycsw app user
+  user: name=pycsw home={{ pycsw_app_home }} system=yes state=present comment="pycsw application"
+
+- name: create pycsw app home directory
+  file: dest={{ pycsw_app_home }} owner=pycsw group=pycsw mode=0755 state=directory
+
+- name: create logs directory
+  file: dest=/var/log/pycsw owner=pycsw group=pycsw mode=0750 state=directory
+
+- name: create config directory
+  file: dest=/etc/pycsw owner=pycsw group=pycsw mode=0755 state=directory
+
+- name: install requested python version with pyenv
+  include_role:
+    name: avanov.pyenv
+  vars:
+    pyenv_path: "{{ pycsw_app_home }}/.pyenv"
+    pyenv_owner: pycsw
+    pyenv_global: system
+    pyenv_python_versions: ["{{ pycsw_python_version }}"]
+    pyenv_virtualenvs: []
+
 - name: ansistrano deploy
   import_role: name=ansistrano.deploy
+  become: true
+  become_user: pycsw
   vars:
     ansistrano_allow_anonymous_stats: false
     ansistrano_deploy_to: "{{ pycsw_app_home }}"

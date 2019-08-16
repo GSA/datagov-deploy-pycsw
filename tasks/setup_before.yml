@@ -1,39 +1,4 @@
 ---
-- name: install os packages
-  apt: name={{ [role_packages, pycsw_app_os_packages] | flatten }} state=present
-  vars:
-    role_packages:
-      - cron
-      - git
-      - python-setuptools  # Needed for ansible pip
-      - rsync  # Needed for ansistrano role
-      - supervisor
-
-- name: ensure supervisor is started and enabled
-  service: name=supervisor state=started enabled=yes
-
-- name: create pycsw app user
-  user: name=pycsw home={{ pycsw_app_home }} system=yes state=present comment="pycsw application"
-
-- name: create pycsw app home directory
-  file: dest={{ pycsw_app_home }} owner=pycsw group=pycsw mode=0755 state=directory
-
-- name: create logs directory
-  file: dest=/var/log/pycsw owner=pycsw group=pycsw mode=0750 state=directory
-
-- name: create config directory
-  file: dest=/etc/pycsw owner=pycsw group=pycsw mode=0755 state=directory
-
-- name: install requested python version with pyenv
-  include_role:
-    name: avanov.pyenv
-  vars:
-    pyenv_path: "{{ pycsw_app_home }}/.pyenv"
-    pyenv_owner: pycsw
-    pyenv_global: system
-    pyenv_python_versions: ["{{ pycsw_python_version }}"]
-    pyenv_virtualenvs: []
-
 # Having virtualenv in python 2 and 3 simplifies things a little
 - name: install virtualenv
   pip: >-
@@ -41,5 +6,3 @@
     name=virtualenv
     state=present
     umask=0022
-  become: true
-  become_user: pycsw

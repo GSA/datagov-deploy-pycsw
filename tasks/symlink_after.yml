@@ -1,14 +1,20 @@
 ---
 - name: create supervisor config
   copy: src=supervisor_{{ pycsw_role }}.conf.j2 dest=/etc/supervisor/conf.d/pycsw.conf owner=root group=root mode=0644
+  become: true
+  become_user: root
   notify: reload supervisor
 
 - name: create crontab
   copy: src=worker.cron dest=/etc/cron.d/pycsw mode=0644
+  become: true
+  become_user: root
   when: pycsw_role == "worker"
 
 - name: create pycsw-collection.cfg
   template: src=pycsw.cfg.j2 dest=/etc/pycsw/pycsw-collection.cfg owner=root group=pycsw mode=0640
+  become: true
+  become_user: root
   vars:
     pycsw_abstract: "{{ pycsw_abstract_collection }}"
     pycsw_app_url: "{{ pycsw_base_url }}/csw"
@@ -16,6 +22,8 @@
 
 - name: create pycsw-all.cfg
   template: src=pycsw.cfg.j2 dest=/etc/pycsw/pycsw-all.cfg owner=root group=pycsw mode=0640
+  become: true
+  become_user: root
   vars:
     pycsw_abstract: "{{ pycsw_abstract_collection }}"
     pycsw_app_url: "{{ pycsw_base_url }}/csw-all"
@@ -28,6 +36,8 @@
 # changed, they will be picked up on the next run.
 - name: restart pycsw web services
   supervisorctl: name={{ item }} state=restarted
+  become: true
+  become_user: root
   loop:
     - pycsw-collection
     - pycsw-all
