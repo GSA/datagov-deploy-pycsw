@@ -12,6 +12,7 @@ pycsw_abstract_collection: >-
   Data may be referenced from federal, state, local, tribal, academic,
   commercial, or non-profit organizations.
 
+pycsw_app_environment: production
 pycsw_app_home: /home/pycsw
 pycsw_app_repo: https://github.com/GSA/pycsw
 pycsw_app_version: datagov/pin-dependencies

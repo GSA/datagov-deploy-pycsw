@@ -4,6 +4,10 @@ stdout_logfile={{ pycsw_log_path }}/pycsw-load.log
 redirect_stderr=true
 autostart=false
 autorestart=false
+{% if pycsw_app_environment == "staging" %}
+# In staging, our certificates are signed with GSA's CA
+environment=REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+{% endif %}
 
 [program:pycsw-keywords-all]
 command={{ pycsw_app_current }}/.venv/bin/pycsw-ckan.py -c set_keywords -f /etc/pycsw/pycsw-all.cfg
