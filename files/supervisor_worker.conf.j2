@@ -1,5 +1,5 @@
 [program:pycsw-load]
-command=/home/pycsw/current/.venv/bin/pycsw-load.sh
+command=/home/pycsw/current/.venv/bin/pycsw-ckan.py -c load -f /etc/ckan/pycsw-all.cfg
 stdout_logfile=/var/log/pycsw/pycsw-load.log
 redirect_stderr=true
 autostart=false
