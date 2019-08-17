@@ -97,6 +97,9 @@ def test_supervisor_conf(host):
     assert conf.group == 'root'
     assert conf.mode == 0o644
 
+    assert conf.contains(
+        'command=/home/%s/current/.venv/bin/pycsw-ckan.py' % app_user)
+
 
 def test_pycsw_worker_services(host):
     pycsw_load = host.supervisor('pycsw-load')

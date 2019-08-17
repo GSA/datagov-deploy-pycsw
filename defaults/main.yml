@@ -25,6 +25,7 @@ pycsw_db_user: pycsw
 pycsw_db_name: pycsw
 pycsw_filter_collection: "ckan_collection = '1'"
 pycsw_keep_releases: 5
+pycsw_log_path: /var/log/pycsw
 pycsw_python_bin: "{{ pycsw_app_home }}/.pyenv/versions/{{ pycsw_python_version }}/bin"
 pycsw_python_version: 2.7.16
 pycsw_role: web

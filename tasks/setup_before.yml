@@ -1,4 +1,8 @@
 ---
+- name: save the app release path to variable
+  set_fact:
+    pycsw_app_release_path: "{{ ansistrano_release_path.stdout }}"
+
 # Having virtualenv in python 2 and 3 simplifies things a little
 - name: install virtualenv
   pip: >-

@@ -5,9 +5,9 @@
 
 - name: install app dependencies into virtualenv
   pip: >-
-    virtualenv={{ ansistrano_release_path.stdout }}/.venv
+    virtualenv={{ pycsw_app_release_path }}/.venv
     virtualenv_command={{ pycsw_python_bin }}/virtualenv
-    requirements={{ ansistrano_release_path.stdout }}/requirements-datagov.txt
-    chdir={{ ansistrano_release_path.stdout }}
+    requirements={{ pycsw_app_release_path }}/requirements-datagov.txt
+    chdir={{ pycsw_app_release_path }}
     umask=0022
     state=present
