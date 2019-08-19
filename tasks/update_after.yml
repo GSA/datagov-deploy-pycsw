@@ -1,7 +1,9 @@
 ---
-- debug:
-    msg: virtualenv_command={{ virtualenv_command }}
-  when: debug is defined
+# ansistrano_release_path is only registered in the update-code phase, so it is
+# not available earlier.
+- name: save the app release path to variable
+  set_fact:
+    pycsw_app_release_path: "{{ ansistrano_release_path.stdout }}"
 
 - name: install app dependencies into virtualenv
   pip: >-
