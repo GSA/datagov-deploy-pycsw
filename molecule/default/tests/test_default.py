@@ -93,6 +93,12 @@ def test_supervisor_conf(host):
     conf = host.file('/etc/supervisor/conf.d/pycsw.conf')
 
     assert conf.exists
+    assert conf.user == 'root'
+    assert conf.group == 'root'
+    assert conf.mode == 0o644
+
+    assert conf.contains(
+            'command=/home/%s/current/.venv/bin/gunicorn' % app_user)
 
 
 def test_pycsw_web_services(host):
