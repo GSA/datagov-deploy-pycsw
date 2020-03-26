@@ -71,9 +71,9 @@ def test_app_virtualenv_python(host):
                        % (app_user, deployment_version))
 
     assert python.exists
+    assert python.is_symlink
     assert python.user == 'pycsw'
     assert python.group == 'pycsw'
-    assert python.mode == 0o755
 
 
 def test_app_os_packages(host):
