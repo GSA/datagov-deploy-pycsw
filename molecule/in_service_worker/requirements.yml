@@ -1,0 +1,3 @@
+---
+- src: ansistrano.deploy
+- src: avanov.pyenv
