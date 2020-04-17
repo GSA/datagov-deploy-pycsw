@@ -3,8 +3,8 @@ command={{ pycsw_app_current }}/.venv/bin/gunicorn pycsw.wsgi:application --bind
 directory={{ pycsw_app_current }}
 stdout_logfile={{ pycsw_log_path }}/pycsw-collection.log
 user=pycsw
-autostart=true
-autorestart=true
+autostart={{ datagov_in_service | default(true) }}
+autorestart={{ datagov_in_service | default(true) }}
 redirect_stderr=true
 environment=PYCSW_CONFIG=/etc/pycsw/pycsw-collection.cfg
 
@@ -13,8 +13,8 @@ command={{ pycsw_app_current }}/.venv/bin/gunicorn pycsw.wsgi:application --bind
 directory={{ pycsw_app_current }}
 stdout_logfile={{ pycsw_log_path }}/pycsw-all.log
 user=pycsw
-autostart=true
-autorestart=true
+autostart={{ datagov_in_service | default(true) }}
+autorestart={{ datagov_in_service | default(true) }}
 redirect_stderr=true
 environment=PYCSW_CONFIG=/etc/pycsw/pycsw-all.cfg
  

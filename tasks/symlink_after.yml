@@ -5,11 +5,19 @@
   become_user: root
   notify: reload supervisor
 
-- name: create crontab
+- name: enable crontab
   copy: src=worker.cron dest=/etc/cron.d/pycsw mode=0644
   become: true
   become_user: root
-  when: pycsw_role == "worker"
+  when:
+    - pycsw_role == "worker"
+    - datagov_in_service | default(true)
+
+- name: disable crontab
+  file: dest=/etc/cron.d/pycsw state=absent
+  become: true
+  become_user: root
+  when: pycsw_role != "worker" or not (datagov_in_service | default(true))
 
 - name: create pycsw-collection.cfg
   template: src=pycsw.cfg.j2 dest=/etc/pycsw/pycsw-collection.cfg owner=root group=pycsw mode=0640
@@ -41,4 +49,6 @@
   loop:
     - pycsw-collection
     - pycsw-all
-  when: pycsw_role == "web"
+  when:
+    - pycsw_role == "web"
+    - datagov_in_service | default(true)
