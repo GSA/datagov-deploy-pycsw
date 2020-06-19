@@ -21,7 +21,7 @@ pycsw_app_os_packages:
   - libpq-dev
 
 pycsw_base_url: https://catalog.data.gov
-pycsw_catalog_ckan_url: https://catalog.data.gov
+pycsw_ckan_url: https://catalog.data.gov
 pycsw_db_user: pycsw
 pycsw_db_name: pycsw
 pycsw_filter_collection: "ckan_collection = '1'"

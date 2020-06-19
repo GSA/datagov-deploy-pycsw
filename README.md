@@ -103,7 +103,7 @@ The version to fetch from `pycsw_app_repo` during application install.
 List of OS packages required by the application.
 
 
-#### `pycsw_catalog_url` string (default: `https://catalog.data.gov`)
+#### `pycsw_ckan_url` string (default: `https://catalog.data.gov`)
 
 The URL to use for the catalog service. This is the CKAN instance that will be
 scanned for the bulk load job.
