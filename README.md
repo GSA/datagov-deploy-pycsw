@@ -93,7 +93,7 @@ This roles installs pycsw at two endpoints, `/csw` and `/csw-all`.
 `pycsw_base_url` is used as a prefix to these URLs.
 
 
-#### `pycsw_app_version` string (default: `master`)
+#### `pycsw_app_version` string (default: `datagov/v2.4.x`)
 
 The version to fetch from `pycsw_app_repo` during application install.
 
