@@ -24,6 +24,7 @@
     role_packages:
       - cron
       - git
+      - libssl-dev  # Needed for python build
       - python-setuptools  # Needed for ansible pip
       - rsync  # Needed for ansistrano role
       - supervisor
