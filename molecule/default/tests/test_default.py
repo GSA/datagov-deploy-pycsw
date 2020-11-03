@@ -100,6 +100,9 @@ def test_supervisor_conf(host):
     assert conf.contains(
             'command=/home/%s/current/.venv/bin/gunicorn' % app_user)
 
+    assert conf.contains(
+            'command=.* --worker-class gevent')
+
 
 def test_pycsw_web_services(host):
     assert host.supervisor('pycsw-collection').is_running
