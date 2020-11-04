@@ -28,6 +28,6 @@ pycsw_filter_collection: "ckan_collection = '1'"
 pycsw_keep_releases: 5
 pycsw_log_path: /var/log/pycsw
 pycsw_python_bin: "{{ pycsw_app_home }}/.pyenv/versions/{{ pycsw_python_version }}/bin"
-pycsw_python_version: 3.6.12
+pycsw_python_version: 3.6.12  # 3.6.x is the latest python3 that will build with our version of openssl
 pycsw_role: web
 pycsw_support_email: datagov@gsa.gov

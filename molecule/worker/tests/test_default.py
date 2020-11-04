@@ -6,8 +6,12 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 app_user = 'pycsw'
-python_version = '2.7.16'
+python_version = '3.6.12'
 deployment_version = '20190308132800Z'
+
+
+# python major minor version e.g. 3.6
+python_major_minor_version = '.'.join(python_version.split('.')[:2])
 
 
 def test_app_home(host):
@@ -22,8 +26,8 @@ def test_app_home(host):
 
 def test_app_python(host):
     python = host.file(
-        '/home/%s/.pyenv/versions/%s/bin/python2.7'
-        % (app_user, python_version))
+        '/home/%s/.pyenv/versions/%s/bin/python%s'
+        % (app_user, python_version, python_major_minor_version))
 
     assert python.exists
     assert python.is_file
@@ -67,8 +71,9 @@ def test_app_virtualenv_dir(host):
 
 
 def test_app_virtualenv_python(host):
-    python = host.file('/home/%s/releases/%s/.venv/bin/python2.7'
-                       % (app_user, deployment_version))
+    python_path = '/home/%s/releases/%s/.venv/bin/python%s' % \
+        (app_user, deployment_version, python_major_minor_version)
+    python = host.file(python_path)
 
     assert python.exists
     assert python.is_symlink
