@@ -38,7 +38,7 @@ jobs:
           paths:
             - .venv
       - run: sudo npm install -g snyk
-      - run: snyk test
+      - run: snyk test --dev
 
 
 workflows:
