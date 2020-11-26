@@ -1,5 +1,5 @@
 [program:pycsw-collection]
-command={{ pycsw_app_current }}/.venv/bin/gunicorn pycsw.wsgi:application --bind localhost:8000
+command={{ pycsw_app_current }}/.venv/bin/gunicorn pycsw.wsgi:application --worker-class gevent --bind localhost:8000
 directory={{ pycsw_app_current }}
 stdout_logfile={{ pycsw_log_path }}/pycsw-collection.log
 user=pycsw
@@ -9,7 +9,7 @@ redirect_stderr=true
 environment=PYCSW_CONFIG=/etc/pycsw/pycsw-collection.cfg
 
 [program:pycsw-all]
-command={{ pycsw_app_current }}/.venv/bin/gunicorn pycsw.wsgi:application --bind localhost:8001
+command={{ pycsw_app_current }}/.venv/bin/gunicorn pycsw.wsgi:application --worker-class gevent --bind localhost:8001
 directory={{ pycsw_app_current }}
 stdout_logfile={{ pycsw_log_path }}/pycsw-all.log
 user=pycsw
@@ -17,5 +17,3 @@ autostart={{ datagov_in_service | default(true) }}
 autorestart={{ datagov_in_service | default(true) }}
 redirect_stderr=true
 environment=PYCSW_CONFIG=/etc/pycsw/pycsw-all.cfg
- 
- 

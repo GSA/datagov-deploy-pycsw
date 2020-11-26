@@ -18,6 +18,30 @@
   set_fact:
     tasks_hooks_path: "{{ role_path }}/tasks"
 
+# Split up os package installs to avoid CI timeouts
+- name: install os packages for python build
+  apt: name={{ packages }} state=present
+  vars:
+    packages:
+      # pyenv/python build dependencies https://github.com/pyenv/pyenv/wiki/Common-build-problems
+      - build-essential
+      - curl
+      - git
+      - libbz2-dev
+      - libffi-dev
+      - liblzma-dev
+      - libncurses5-dev
+      - libncursesw5-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - libssl-dev
+      - llvm
+      - python-openssl
+      - tk-dev
+      - wget
+      - xz-utils
+      - zlib1g-dev
+
 - name: install os packages
   apt: name={{ [role_packages, pycsw_app_os_packages] | flatten }} state=present
   vars:
