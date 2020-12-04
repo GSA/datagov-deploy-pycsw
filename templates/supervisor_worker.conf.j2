@@ -1,6 +1,7 @@
 [program:pycsw-load]
 command={{ pycsw_app_current }}/.venv/bin/pycsw-ckan.py -c load -f /etc/pycsw/pycsw-all.cfg
 stdout_logfile={{ pycsw_log_path }}/pycsw-load.log
+user=pycsw
 redirect_stderr=true
 autostart=false
 autorestart=false
@@ -12,6 +13,7 @@ environment=REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 [program:pycsw-keywords-all]
 command={{ pycsw_app_current }}/.venv/bin/pycsw-ckan.py -c set_keywords -f /etc/pycsw/pycsw-all.cfg
 stdout_logfile={{ pycsw_log_path }}/keywords-all.log
+user=pycsw
 redirect_stderr=true
 autostart=false
 autorestart=false
@@ -19,6 +21,7 @@ autorestart=false
 [program:pycsw-keywords-collection]
 command={{ pycsw_app_current }}/.venv/bin/pycsw-ckan.py -c set_keywords -f /etc/pycsw/pycsw-collection.cfg
 stdout_logfile={{ pycsw_log_path }}/keywords-collection.log
+user=pycsw
 redirect_stderr=true
 autostart=false
 autorestart=false
@@ -26,6 +29,7 @@ autorestart=false
 [program:pycsw-reindex-fts]
 command={{ pycsw_app_current }}/.venv/bin/pycsw-db-admin.py reindex_fts /etc/pycsw/pycsw-all.cfg
 stdout_logfile={{ pycsw_log_path }}/reindex-fts.log
+user=pycsw
 redirect_stderr=true
 autostart=false
 autorestart=false
