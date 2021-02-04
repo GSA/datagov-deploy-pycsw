@@ -15,7 +15,7 @@ pycsw_abstract_collection: >-
 pycsw_app_environment: production
 pycsw_app_home: /home/pycsw
 pycsw_app_repo: https://github.com/GSA/pycsw
-pycsw_app_version: datagov/v2.4.x
+pycsw_app_version: fcs
 pycsw_app_os_packages:
   - libgeos-dev
   - libpq-dev
