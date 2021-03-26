@@ -3,7 +3,7 @@ ignore:
     - '*':
         reason: >-
           solaris_zone module is not used, fix requires ansible 2.9
-        expires: 2020-12-19T00:00:00.000Z
+        expires: 2021-06-25T00:00:00.000Z
   SNYK-PYTHON-PYYAML-590151:
     - '*':
         reason: >-
@@ -12,3 +12,23 @@ ignore:
           operators.  These operators should only be using trusted sources as
           well.  Risk is acceptable.
         expires: 2020-12-19T06:00:00.000Z
+  SNYK-PYTHON-ANYCONFIG-1055467:
+    - '*':
+        reason: >-
+          Anyconfig is pulled in by molecule, which has not been updated.
+          Config files are all trusted input and run on secure machines.
+        expires: 2021-04-26T06:00:00.000Z
+  SNYK-PYTHON-ANSIBLE-1086591:
+    - '*':
+        reason: >-
+          Managed nodes and ansible controllers are only accessible to data.gov
+          operators. Additional work will be done to scrub the logs for any
+          information exposure
+          https://github.com/GSA/datagov-deploy/issues/3027
+        expires: 2021-06-16T06:00:00.000Z
+  SNYK-PYTHON-CRYPTOGRAPHY-1022152:
+    - '*':
+        reason: >-
+          Mitigation patches are up to date (>3.2).
+          No fixed version at this time.
+        expires: 2021-04-10T06:00:00.000Z
